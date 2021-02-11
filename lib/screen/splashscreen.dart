@@ -1,3 +1,4 @@
+import 'package:NavanaAir/constants/constantStrings.dart';
 import 'package:NavanaAir/constants/constantcolors.dart';
 import 'package:NavanaAir/screen/getStarted.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+
+  //displaying the splash screen for some seconds and navigating to the next screen
   void initState() {
     super.initState();
     Future.delayed(
@@ -18,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => CustomIndicator(),
+              builder: (BuildContext context) => Getstarted(),
             ));
       },
     );
@@ -31,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: CustomColors.sbBlue,
+        color: CustomColors.backgroundBlue,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -43,14 +46,14 @@ class _SplashScreenState extends State<SplashScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('navana',
+                Text(ConstantString.splashScreenTextNavana,
                     style: GoogleFonts.sniglet(
-                        color: CustomColors.sbWhite, fontSize: 40)),
+                        color: CustomColors.splashTextWhite, fontSize: 40)),
                 //fontWeight: FontWeight.bold)),
                 Text(
-                  ' air',
+                  ConstantString.splashScreenTextAir,
                   style: GoogleFonts.sniglet(
-                      color: CustomColors.sbPink, fontSize: 40),
+                      color: CustomColors.splashTextPink, fontSize: 40),
                   //fontWeight: FontWeight.bold),
                 )
               ],
