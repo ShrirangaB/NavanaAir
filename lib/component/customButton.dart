@@ -12,7 +12,7 @@ class PrimaryButton extends StatelessWidget {
     return RaisedButton(
       color: CustomColors.buttonPink,
       child: Container(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width * 0.58,
           padding: EdgeInsets.all(18.0),
           child: Text(
             title,
@@ -34,7 +34,7 @@ class FlatCustomButton extends StatelessWidget {
     return FlatButton(
       onPressed: () {},
       child: Text(title,
-          style: TextStyle(color: CustomColors.buttonTextWhite, fontSize: 15)),
+          style: TextStyle(color: CustomColors.buttonPink, fontSize: 15)),
     );
   }
 }

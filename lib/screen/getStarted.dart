@@ -33,6 +33,19 @@ class GetstartedState extends State {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height; //Orientation Checking
+    final width = MediaQuery.of(context).size.width;
+    try {
+      if (width > 500) {
+        return CarouselSlide(height = 300);
+      } else {
+        return CarouselSlide(height = MediaQuery.of(context).size.width);
+      }
+    } catch (e) {}
+  }
+
+  @override
+  Widget CarouselSlide(height) {
     // TODO: implement build
     return Scaffold(
       body: Container(
