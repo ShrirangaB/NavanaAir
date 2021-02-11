@@ -1,5 +1,3 @@
-import 'package:NavanaAir/screen/getStarted.dart';
-import 'package:NavanaAir/screen/signup.dart';
 import 'package:NavanaAir/screen/splashscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Navana Air',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        //  primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SplashScreen(),

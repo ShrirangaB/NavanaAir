@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ConstantString {
   static const splashScreenTextNavana = "navana";
   static const splashScreenTextAir = "air";
-  static const buttonTextGetStarted = "Get Started";
+  static const buttonTextGetStarted = "START BOOKING";
   static const titleTextSignUp1 = "Create";
   static const titleTextSignUp2 = "an account";
 }

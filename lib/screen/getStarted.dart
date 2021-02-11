@@ -1,4 +1,5 @@
 import 'package:NavanaAir/component/customButton.dart';
+import 'package:NavanaAir/component/spaceBetweenSizedBox.dart';
 import 'package:NavanaAir/constants/constantStrings.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class Getstarted extends StatefulWidget {
 class GetstartedState extends State {
   CarouselSlider carouselSlider;
   int _current = 0;
-
+  //looping through the images
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
     try {
@@ -25,7 +26,7 @@ class GetstartedState extends State {
       }
     } on Exception catch (e) {
       // TODO
-      // print(e.toString());
+      print(e.toString());
     }
     return result;
   }
@@ -41,14 +42,14 @@ class GetstartedState extends State {
           children: <Widget>[
             //carouselSlider
             carouselSlider = CarouselSlider(
-              height: MediaQuery.of(context).size.height / 1.5,
+              height: MediaQuery.of(context).size.height / 2,
               initialPage: 0,
               aspectRatio: 4 / 3,
               enableInfiniteScroll: false,
               enlargeCenterPage: true,
               scrollDirection: Axis.horizontal,
               onPageChanged: (index) {
-                //for navigation dots
+                //passing state to index for navigation dots
                 setState(() {
                   _current = index;
                 });
@@ -58,7 +59,7 @@ class GetstartedState extends State {
                   builder: (BuildContext context) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
+                      height: MediaQuery.of(context).size.height / 2,
                       margin: EdgeInsets.symmetric(horizontal: 10.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
@@ -66,7 +67,7 @@ class GetstartedState extends State {
                           image: AssetImage(
                             imgUrl,
                           ),
-                          fit: BoxFit.contain,
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
                     );
@@ -74,10 +75,9 @@ class GetstartedState extends State {
                 );
               }).toList(),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            //Navigation dots
+            //sizedbox from component class
+            CustomSizedBox(),
+            //custom Navigation dots
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: map<Widget>(imgList, (index, url) {
@@ -93,10 +93,9 @@ class GetstartedState extends State {
                 );
               }),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            //Raisedbutton
+            //sizedbox from component class
+            CustomSizedBox(),
+
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
               PrimaryButton(
                 onPressed: () {

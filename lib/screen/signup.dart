@@ -1,5 +1,5 @@
 import 'package:NavanaAir/constants/constantcolors.dart';
-
+import 'package:NavanaAir/component/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
             TextField(),
             TextField(),
             TextField(),
-            //FlatCustomButton(onPressed: () {}, title: 'login')
+            FlatCustomButton(onPressed: () {}, title: ''),
           ],
         )),
       ],
