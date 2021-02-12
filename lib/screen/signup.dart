@@ -178,11 +178,15 @@ class _SignUpState extends State<SignUp> {
 //---------------raisedbutton from reusable component
                             PrimaryButton(
                               onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  print("successful");
-                                  return;
-                                } else {
-                                  print("UnSuccessfull");
+                                try {
+                                  if (_formKey.currentState.validate()) {
+                                    print("successful");
+                                    return;
+                                  } else {
+                                    print("UnSuccessfull");
+                                  }
+                                } on Exception catch (e) {
+                                  // TODO
                                 }
                               },
                               title: ConstantString.buttonTextSignUp,
@@ -221,13 +225,17 @@ class _SignUpState extends State<SignUp> {
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regex = RegExp(pattern);
     print(value);
-    if (value.isEmpty) {
-      return 'Please enter password';
-    } else {
-      if (!regex.hasMatch(value))
-        return 'Must contain atleast 1 number,UPPERCASE\nlowercase and a special charcter';
-      else
-        return null;
+    try {
+      if (value.isEmpty) {
+        return 'Please enter password';
+      } else {
+        if (!regex.hasMatch(value))
+          return 'Must contain atleast 1 number,UPPERCASE\nlowercase and a special charcter';
+        else
+          return null;
+      }
+    } on Exception catch (e) {
+      // TODO
     }
   }
 
