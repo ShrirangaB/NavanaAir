@@ -67,15 +67,13 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.all(25),
                               child: Column(
                                 children: [
-                                  //textfeilds for name
+//---------------textfeilds for name
                                   TextFormField(
-                                    // key: _formKey,
                                     autofocus: true,
                                     textCapitalization:
                                         TextCapitalization.words,
                                     keyboardType: TextInputType.name,
                                     controller: userNameController,
-                                    // cursorColor: CustomizeColors.textBlackColor,
                                     style: TextStyle(
                                         color: CustomColors.titleBlue),
                                     decoration: InputDecoration(
@@ -87,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                                         borderSide: BorderSide(
                                             color: CustomColors.titleBlue),
                                       ),
-                                      labelText: 'Name',
+                                      labelText: ConstantString.labelTextName,
                                       labelStyle: TextStyle(
                                           color: CustomColors.titleBlue),
                                       hintStyle: TextStyle(
@@ -95,12 +93,10 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                     validator: validateName,
                                   ),
-                                  //textformfeild for email
+//------------------------textformfeild for email
                                   TextFormField(
-                                    //key: _formKey,
                                     keyboardType: TextInputType.emailAddress,
                                     controller: emailController,
-                                    // cursorColor: CustomizeColors.textBlackColor,
                                     style: TextStyle(
                                         color: CustomColors.titleBlue),
                                     decoration: InputDecoration(
@@ -113,7 +109,7 @@ class _SignUpState extends State<SignUp> {
                                         borderSide: BorderSide(
                                             color: CustomColors.titleBlue),
                                       ),
-                                      labelText: 'Email',
+                                      labelText: ConstantString.labelTextEmail,
                                       labelStyle: TextStyle(
                                           color: CustomColors.titleBlue),
                                       hintStyle: TextStyle(
@@ -135,7 +131,7 @@ class _SignUpState extends State<SignUp> {
                                     },
                                   ),
 
-                                  //textformfeild for validations
+                                  //-----------------textformfeild for password Input
                                   TextFormField(
                                     keyboardType: TextInputType.text,
                                     controller: passwordController,
@@ -155,7 +151,7 @@ class _SignUpState extends State<SignUp> {
                                       ),
                                       suffixIcon: IconButton(
                                         icon: Icon(
-                                          // Based on passwordVisible state choose the icon
+                                          // Based on showPassword state choose the icon
                                           _showPassword
                                               ? Icons.visibility
                                               : Icons.visibility_off,
@@ -167,7 +163,7 @@ class _SignUpState extends State<SignUp> {
                                           });
                                         },
                                       ),
-                                      labelText: 'Password',
+                                      labelText: ConstantString.labelTextPwd,
                                       labelStyle: TextStyle(
                                           color: CustomColors.titleBlue),
                                       hintStyle: TextStyle(
@@ -179,7 +175,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             CustomSizedBox(),
-                            //raisedbutton from reusable code
+//---------------raisedbutton from reusable component
                             PrimaryButton(
                               onPressed: () {
                                 if (_formKey.currentState.validate()) {
@@ -197,12 +193,14 @@ class _SignUpState extends State<SignUp> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(ConstantString.textSignUp),
+                                //--------------flatbutton for sign up
                                 FlatCustomButton(
                                   onPressed: () {},
                                   title: ConstantString.loginText,
                                 ),
                               ],
                             ),
+                            //--------------flatbutton for skip
                             FlatCustomButton(
                               onPressed: () {},
                               title: ConstantString.skipLoginText,
@@ -217,11 +215,11 @@ class _SignUpState extends State<SignUp> {
         ));
   }
 
-  //Validation for the password
+  //Validating the password
   String validatePassword(String value) {
     Pattern pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    RegExp regex = new RegExp(pattern);
+    RegExp regex = RegExp(pattern);
     print(value);
     if (value.isEmpty) {
       return 'Please enter password';
@@ -233,21 +231,21 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
-  //Validation for the email
+  //Validating the email
   String validateEmail(String value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
+    RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value)) {
       print('Email is valid');
       return 'Enter Valid Email';
     } else {
-      print('Email is correct');
-      return 'Email is correct';
+      print('valid Email');
+      return 'valid Email';
     }
   }
 
-  //Validation for the name
+  //Validating the Name
   String validateName(String value) {
     if (value.isEmpty) {
       return 'Please enter the name';
