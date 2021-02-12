@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUp> {
                       left: 0,
                       child: Opacity(
                           opacity: 0.25,
-                          child: Image.asset('assets/images/dwm.jpg'))),
+                          child: Image.asset(ConstantString.opacImage))),
                   Positioned(
                       top: MediaQuery.of(context).size.height / 5,
                       child: Padding(
@@ -118,12 +118,12 @@ class _SignUpState extends State<SignUp> {
                                     validator: (String value) {
                                       try {
                                         if (value.isEmpty) {
-                                          return 'Please Enter name';
+                                          return ConstantString.enterName;
                                         }
                                         if (!RegExp(
-                                                "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                                ConstantString.regExpression)
                                             .hasMatch(value)) {
-                                          return 'Please Enter a valid Email';
+                                          return ConstantString.enterValidEmail;
                                         }
                                         return null;
                                       } on Exception catch (e) {
@@ -135,7 +135,7 @@ class _SignUpState extends State<SignUp> {
                                     },
                                   ),
 
-                                  //-----------------textformfeild for password Input
+//-----------------textformfeild for password Input
                                   TextFormField(
                                     keyboardType: TextInputType.text,
                                     controller: passwordController,
@@ -184,10 +184,10 @@ class _SignUpState extends State<SignUp> {
                               onPressed: () {
                                 try {
                                   if (_formKey.currentState.validate()) {
-                                    print("successful");
+                                    print(ConstantString.successful);
                                     return;
                                   } else {
-                                    print("UnSuccessfull");
+                                    print(ConstantString.unSuccessful);
                                   }
                                 } on Exception catch (e) {
                                   // TODO
@@ -231,10 +231,10 @@ class _SignUpState extends State<SignUp> {
     print(value);
     try {
       if (value.isEmpty) {
-        return 'Please enter password';
+        return ConstantString.pleaseEnterPwd;
       } else {
         if (!regex.hasMatch(value))
-          return 'Must contain atleast 1 number,UPPERCASE\nlowercase and a special charcter';
+          return ConstantString.pwdCondition;
         else
           return null;
       }
@@ -242,20 +242,6 @@ class _SignUpState extends State<SignUp> {
       // TODO
     }
   }
-
-  //Validating the email
-  // String validateEmail(String value) {
-  //   Pattern pattern =
-  //       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  //   RegExp regex = RegExp(pattern);
-  //   if (!regex.hasMatch(value)) {
-  //     print('Email is valid');
-  //     return 'Enter Valid Email';
-  //   } else {
-  //     print(ConstantString.validEmail);
-  //     return ConstantString.validEmail;
-  //   }
-  // }
 
   //Validating the Name
   String validateName(String value) {
@@ -265,3 +251,17 @@ class _SignUpState extends State<SignUp> {
     return null;
   }
 }
+
+//Validating the email
+// String validateEmail(String value) {
+//   Pattern pattern =
+//       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+//   RegExp regex = RegExp(pattern);
+//   if (!regex.hasMatch(value)) {
+//     print('Email is valid');
+//     return 'Enter Valid Email';
+//   } else {
+//     print(ConstantString.validEmail);
+//     return ConstantString.validEmail;
+//   }
+// }
