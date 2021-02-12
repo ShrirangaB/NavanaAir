@@ -116,15 +116,19 @@ class _SignUpState extends State<SignUp> {
                                           color: CustomColors.titleBlue),
                                     ),
                                     validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return 'Please a Enter';
+                                      try {
+                                        if (value.isEmpty) {
+                                          return 'Please Enter name';
+                                        }
+                                        if (!RegExp(
+                                                "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                            .hasMatch(value)) {
+                                          return 'Please Enter a valid Email';
+                                        }
+                                        return null;
+                                      } on Exception catch (e) {
+                                        // TODO
                                       }
-                                      if (!RegExp(
-                                              "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                          .hasMatch(value)) {
-                                        return 'Please a valid Email';
-                                      }
-                                      return null;
                                     },
                                     onSaved: (String value) {
                                       email = value;
@@ -240,23 +244,23 @@ class _SignUpState extends State<SignUp> {
   }
 
   //Validating the email
-  String validateEmail(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(value)) {
-      print('Email is valid');
-      return 'Enter Valid Email';
-    } else {
-      print('valid Email');
-      return 'valid Email';
-    }
-  }
+  // String validateEmail(String value) {
+  //   Pattern pattern =
+  //       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  //   RegExp regex = RegExp(pattern);
+  //   if (!regex.hasMatch(value)) {
+  //     print('Email is valid');
+  //     return 'Enter Valid Email';
+  //   } else {
+  //     print(ConstantString.validEmail);
+  //     return ConstantString.validEmail;
+  //   }
+  // }
 
   //Validating the Name
   String validateName(String value) {
     if (value.isEmpty) {
-      return 'Please enter the name';
+      return ConstantString.validname;
     }
     return null;
   }

@@ -13,6 +13,8 @@ class ConstantString {
   static const labelTextName = "Name";
   static const labelTextEmail = "Email";
   static const labelTextPwd = "Password";
+  static const validEmail = "valid Email";
+  static const validname = "Please enter the name";
 }
 
 //adding  images in a list
