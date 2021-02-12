@@ -1,5 +1,6 @@
 import 'package:NavanaAir/component/customButton.dart';
 import 'package:NavanaAir/component/spaceBetweenSizedBox.dart';
+import 'package:NavanaAir/component/experiment.dart';
 import 'package:NavanaAir/constants/constantStrings.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

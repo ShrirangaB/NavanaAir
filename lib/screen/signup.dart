@@ -4,7 +4,6 @@ import 'package:NavanaAir/constants/constantStrings.dart';
 import 'package:NavanaAir/component/spaceBetweenSizedBox.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wc_form_validators/wc_form_validators.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -13,7 +12,8 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool _showPassword;
-  String _password;
+  String email;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -40,10 +40,10 @@ class _SignUpState extends State<SignUp> {
                       top: 0,
                       left: 0,
                       child: Opacity(
-                          opacity: 0.15,
+                          opacity: 0.25,
                           child: Image.asset('assets/images/dwm.jpg'))),
                   Positioned(
-                      top: MediaQuery.of(context).size.height / 4,
+                      top: MediaQuery.of(context).size.height / 5,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                         child: Text(
@@ -55,11 +55,11 @@ class _SignUpState extends State<SignUp> {
                         ),
                       )),
                   Positioned(
-                      top: MediaQuery.of(context).size.height / 3,
+                      top: MediaQuery.of(context).size.height / 4,
                       left: 0,
                       right: 0,
-                      child: SingleChildScrollView(
-                        //padding: const EdgeInsets.all(0),
+                      child: Form(
+                        key: _formKey,
                         child: Column(
                           children: [
                             CustomSizedBox(),
@@ -67,48 +67,113 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.all(25),
                               child: Column(
                                 children: [
-                                  //textfeilds for input
-                                  TextField(
+                                  //textfeilds for name
+                                  TextFormField(
+                                    // key: _formKey,
+                                    autofocus: true,
+                                    textCapitalization:
+                                        TextCapitalization.words,
+                                    keyboardType: TextInputType.name,
+                                    controller: userNameController,
+                                    // cursorColor: CustomizeColors.textBlackColor,
+                                    style: TextStyle(
+                                        color: CustomColors.titleBlue),
                                     decoration: InputDecoration(
-                                      labelText: ConstantString.labelTextName,
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: CustomColors.titleBlue),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: CustomColors.titleBlue),
+                                      ),
+                                      labelText: 'Name',
+                                      labelStyle: TextStyle(
+                                          color: CustomColors.titleBlue),
+                                      hintStyle: TextStyle(
+                                          color: CustomColors.titleBlue),
                                     ),
+                                    validator: validateName,
                                   ),
-                                  TextField(
+                                  //textformfeild for email
+                                  TextFormField(
+                                    //key: _formKey,
+                                    keyboardType: TextInputType.emailAddress,
+                                    controller: emailController,
+                                    // cursorColor: CustomizeColors.textBlackColor,
+                                    style: TextStyle(
+                                        color: CustomColors.titleBlue),
                                     decoration: InputDecoration(
-                                      suffixIcon: Icon(Icons.check_sharp),
-                                      labelText: ConstantString.labelTextEmail,
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: CustomColors.titleBlue),
+                                      ),
+                                      suffixIcon: Icon(Icons.email),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: CustomColors.titleBlue),
+                                      ),
+                                      labelText: 'Email',
+                                      labelStyle: TextStyle(
+                                          color: CustomColors.titleBlue),
+                                      hintStyle: TextStyle(
+                                          color: CustomColors.titleBlue),
                                     ),
+                                    validator: (String value) {
+                                      if (value.isEmpty) {
+                                        return 'Please a Enter';
+                                      }
+                                      if (!RegExp(
+                                              "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                          .hasMatch(value)) {
+                                        return 'Please a valid Email';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (String value) {
+                                      email = value;
+                                    },
                                   ),
+
                                   //textformfeild for validations
                                   TextFormField(
                                     keyboardType: TextInputType.text,
                                     controller: passwordController,
-                                    validator: Validators.compose([
-                                      Validators.required(
-                                          'Password is required'),
-                                      Validators.patternString(
-                                          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
-                                          'Invalid Password')
-                                    ]),
-                                    obscureText:
-                                        !_showPassword, //changing obscure text dynamically
+                                    //This will obscure text dynamically
+                                    obscureText: !_showPassword,
+                                    cursorColor: Colors.black,
+                                    style: TextStyle(
+                                        color: CustomColors.titleBlue),
                                     decoration: InputDecoration(
-                                      labelText: ConstantString.labelTextPwd,
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: CustomColors.titleBlue),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: CustomColors.titleBlue),
+                                      ),
                                       suffixIcon: IconButton(
                                         icon: Icon(
-                                          // Based on showPassword state,the icon is changed
+                                          // Based on passwordVisible state choose the icon
                                           _showPassword
                                               ? Icons.visibility
                                               : Icons.visibility_off,
+                                          color: CustomColors.greyDots,
                                         ),
                                         onPressed: () {
-                                          // Update the state of showPassword
                                           setState(() {
                                             _showPassword = !_showPassword;
                                           });
                                         },
                                       ),
+                                      labelText: 'Password',
+                                      labelStyle: TextStyle(
+                                          color: CustomColors.titleBlue),
+                                      hintStyle: TextStyle(
+                                          color: CustomColors.titleBlue),
                                     ),
+                                    validator: validatePassword,
                                   ),
                                 ],
                               ),
@@ -117,12 +182,11 @@ class _SignUpState extends State<SignUp> {
                             //raisedbutton from reusable code
                             PrimaryButton(
                               onPressed: () {
-                                //showAlertDialog(context);
-                                if (emailController.text == 'test@gmail.com' &&
-                                    passwordController.text == '2sd!#abc') {
-                                  print('login succesfull');
+                                if (_formKey.currentState.validate()) {
+                                  print("successful");
+                                  return;
                                 } else {
-                                  print('login fail');
+                                  print("UnSuccessfull");
                                 }
                               },
                               title: ConstantString.buttonTextSignUp,
@@ -151,5 +215,43 @@ class _SignUpState extends State<SignUp> {
             ),
           ],
         ));
+  }
+
+  //Validation for the password
+  String validatePassword(String value) {
+    Pattern pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regex = new RegExp(pattern);
+    print(value);
+    if (value.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value))
+        return 'Must contain atleast 1 number,UPPERCASE\nlowercase and a special charcter';
+      else
+        return null;
+    }
+  }
+
+  //Validation for the email
+  String validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      print('Email is valid');
+      return 'Enter Valid Email';
+    } else {
+      print('Email is correct');
+      return 'Email is correct';
+    }
+  }
+
+  //Validation for the name
+  String validateName(String value) {
+    if (value.isEmpty) {
+      return 'Please enter the name';
+    }
+    return null;
   }
 }
