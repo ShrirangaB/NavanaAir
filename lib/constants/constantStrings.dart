@@ -24,6 +24,11 @@ class ConstantString {
   static const enterName = "please enter name";
   static const enterValidEmail = "Please enter the Email";
   static const opacImage = "assets/images/dwm.jpg";
+  static const logInText = "Log In";
+  static const logInWith = "Log in with";
+  static const forgotPwd = "Forgot Password?";
+  static const loginButtonTxt = "Log In";
+  static const dontHaveAcc = "Don't have an account?";
 }
 
 //adding  images in a list
@@ -33,3 +38,49 @@ List imgList = [
   "assets/images/image2.jpg",
   "assets/images/image3.jpg",
 ];
+
+//  //Validating the password
+//   String validatePassword(String value) {
+//     Pattern pattern =
+//         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+//     RegExp regex = RegExp(pattern);
+//     print(value);
+//     try {
+//       if (value.isEmpty) {
+//         return ConstantString.pleaseEnterPwd;
+//       } else {
+//         if (!regex.hasMatch(value))
+//           return ConstantString.pwdCondition;
+//         else
+//           return null;
+//       }
+//     } on Exception catch (e) {
+//       // TODO
+//     }
+//   }
+
+//   //Validating the Name
+//   String validateName(String value) {
+//     if (value.isEmpty) {
+//       return ConstantString.validname;
+//     }
+//     return null;
+//   }
+
+// //Validating the email
+// String validateEmail(String value) {
+//   Pattern pattern =
+//       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+//   RegExp regex = RegExp(pattern);
+//   try {
+//     if (!regex.hasMatch(value)) {
+//       print('Email is valid');
+//       return 'Enter Valid Email';
+//     } else {
+//       print(ConstantString.validEmail);
+//       return ConstantString.validEmail;
+//     }
+//   } on Exception catch (e) {
+//       // TODO
+//   }
+// }

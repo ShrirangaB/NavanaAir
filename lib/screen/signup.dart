@@ -55,7 +55,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                       )),
                   Positioned(
-                      top: MediaQuery.of(context).size.height / 4,
+                      top: MediaQuery.of(context).size.height / 3.5,
                       left: 0,
                       right: 0,
                       child: Form(
@@ -67,7 +67,7 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.all(25),
                               child: Column(
                                 children: [
-//---------------textfeilds for name
+                                  //---------------textfeilds for name
                                   TextFormField(
                                     autofocus: true,
                                     textCapitalization:
@@ -93,7 +93,7 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                     validator: validateName,
                                   ),
-//------------------------textformfeild for email
+                                  //------------------------textformfeild for email
                                   TextFormField(
                                     keyboardType: TextInputType.emailAddress,
                                     controller: emailController,
@@ -135,7 +135,7 @@ class _SignUpState extends State<SignUp> {
                                     },
                                   ),
 
-//-----------------textformfeild for password Input
+                                  //-----------------textformfeild for password Input
                                   TextFormField(
                                     keyboardType: TextInputType.text,
                                     controller: passwordController,
@@ -179,7 +179,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             CustomSizedBox(),
-//---------------raisedbutton from reusable component
+                            //---------------raisedbutton from reusable component
                             PrimaryButton(
                               onPressed: () {
                                 try {
