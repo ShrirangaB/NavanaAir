@@ -1,3 +1,4 @@
+import 'package:NavanaAir/screen/homeScreen/home.dart';
 import 'package:NavanaAir/screen/login.dart';
 import 'package:NavanaAir/screen/splashscreen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         //  primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }

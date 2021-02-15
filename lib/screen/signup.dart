@@ -2,8 +2,11 @@ import 'package:NavanaAir/constants/constantcolors.dart';
 import 'package:NavanaAir/component/customButton.dart';
 import 'package:NavanaAir/constants/constantStrings.dart';
 import 'package:NavanaAir/component/spaceBetweenSizedBox.dart';
+import 'package:NavanaAir/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'homeScreen/home.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -115,6 +118,7 @@ class _SignUpState extends State<SignUp> {
                                       hintStyle: TextStyle(
                                           color: CustomColors.titleBlue),
                                     ),
+                                    // ignore: missing_return
                                     validator: (String value) {
                                       try {
                                         if (value.isEmpty) {
@@ -201,10 +205,15 @@ class _SignUpState extends State<SignUp> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(ConstantString.textSignUp),
-                                //--------------flatbutton for sign up
-                                FlatCustomButton(
-                                  onPressed: () {},
-                                  title: ConstantString.loginText,
+                                //--------------flatbutton for log in
+                                MaterialButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
+                                  },
+                                  child: Text(ConstantString.loginText),
                                 ),
                               ],
                             ),
@@ -224,6 +233,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   //Validating the password
+  // ignore: missing_return
   String validatePassword(String value) {
     Pattern pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';

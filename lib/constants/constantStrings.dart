@@ -29,6 +29,14 @@ class ConstantString {
   static const forgotPwd = "Forgot Password?";
   static const loginButtonTxt = "Log In";
   static const dontHaveAcc = "Don't have an account?";
+  static const homeTitle = "Home";
+  static const flightHome = "Flight";
+  static const trainHome = "Train";
+  static const carHome = "Car";
+  static const restHome = "Restaurants";
+  static const bestOffers = "Best Offers";
+  static const recDestinations = "Recommended Destinations";
+  static const viewAll = "View All";
 }
 
 //adding  images in a list

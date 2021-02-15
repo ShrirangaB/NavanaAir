@@ -2,8 +2,14 @@ import 'package:NavanaAir/component/customButton.dart';
 import 'package:NavanaAir/component/spaceBetweenSizedBox.dart';
 import 'package:NavanaAir/constants/constantStrings.dart';
 import 'package:NavanaAir/constants/constantcolors.dart';
+import 'package:NavanaAir/screen/homeScreen/home.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:firebase_core/firebase_core.dart';
+import 'package:NavanaAir/services/loginAuth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,6 +17,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _showPassword;
+  String email;
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    _showPassword = false;
+  }
+
+  TextEditingController loginEmailController = TextEditingController();
+  TextEditingController loginPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,8 +90,90 @@ class _LoginPageState extends State<LoginPage> {
                                 padding: const EdgeInsets.all(8),
                                 child: Column(
                                   children: [
-                                    TextFormField(),
-                                    TextFormField(),
+//--------------------------------textfeild for email
+                                    TextFormField(
+                                      keyboardType: TextInputType.emailAddress,
+                                      controller: loginEmailController,
+                                      style: TextStyle(
+                                          color: CustomColors.titleBlue),
+                                      decoration: InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: CustomColors.titleBlue),
+                                        ),
+                                        suffixIcon: Icon(Icons.email),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: CustomColors.titleBlue),
+                                        ),
+                                        labelText:
+                                            ConstantString.labelTextEmail,
+                                        labelStyle: TextStyle(
+                                            color: CustomColors.titleBlue),
+                                        hintStyle: TextStyle(
+                                            color: CustomColors.titleBlue),
+                                      ),
+                                      // ignore: missing_return
+                                      validator: (String value) {
+                                        try {
+                                          if (value.isEmpty) {
+                                            return ConstantString.enterName;
+                                          }
+                                          if (!RegExp(
+                                                  ConstantString.regExpression)
+                                              .hasMatch(value)) {
+                                            return ConstantString
+                                                .enterValidEmail;
+                                          }
+                                          return null;
+                                        } on Exception catch (e) {
+                                          // TODO
+                                        }
+                                      },
+                                      onSaved: (String value) {
+                                        email = value;
+                                      },
+                                    ),
+//-----------------------------textfeild for password
+                                    TextFormField(
+                                      keyboardType: TextInputType.text,
+                                      controller: loginPasswordController,
+                                      //This will obscure text dynamically
+                                      obscureText: !_showPassword,
+                                      cursorColor: Colors.black,
+                                      style: TextStyle(
+                                          color: CustomColors.titleBlue),
+                                      decoration: InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: CustomColors.titleBlue),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: CustomColors.titleBlue),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            // Based on showPassword state choose the icon
+                                            _showPassword
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                            color: CustomColors.greyDots,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              _showPassword = !_showPassword;
+                                            });
+                                          },
+                                        ),
+                                        labelText: ConstantString.labelTextPwd,
+                                        labelStyle: TextStyle(
+                                            color: CustomColors.titleBlue),
+                                        hintStyle: TextStyle(
+                                            color: CustomColors.titleBlue),
+                                      ),
+                                      validator: validatePassword,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -84,12 +183,25 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               CustomSizedBoxx(),
                               Center(
+//---------------------------login button
                                 child: PrimaryButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      try {
+                                        if (_formKey.currentState.validate()) {
+                                          print(ConstantString.successful);
+                                          return;
+                                        } else {
+                                          print(ConstantString.unSuccessful);
+                                        }
+                                      } on Exception catch (e) {
+                                        // TODO
+                                      }
+                                    },
                                     title: ConstantString.loginButtonTxt),
                               ),
                               CustomSizedBox(),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(ConstantString.logInWith),
                                   SizedBox(
@@ -97,7 +209,8 @@ class _LoginPageState extends State<LoginPage> {
                                         0.04,
                                   ),
                                   FloatingActionButton(
-                                    backgroundColor: CustomColors.constantWhite,
+                                    heroTag: 1,
+                                    backgroundColor: CustomColors.fbBlue,
                                     onPressed: () {},
                                     child: Image.asset('assets/images/fb.png'),
                                   ),
@@ -106,8 +219,22 @@ class _LoginPageState extends State<LoginPage> {
                                         0.04,
                                   ),
                                   FloatingActionButton(
+                                    heroTag: 2,
                                     backgroundColor: CustomColors.constantWhite,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      signInWithGoogle().whenComplete(() {
+                                        // Navigator.of(context).push(
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) {
+                                        //   return RandomWidget();
+                                        // }));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomePage()));
+                                      });
+                                    },
                                     child:
                                         Image.asset('assets/images/google.png'),
                                   ),
@@ -116,12 +243,21 @@ class _LoginPageState extends State<LoginPage> {
                               CustomSizedBox(),
                               CustomSizedBoxx(),
                               Center(
+//------------------bottom Text and a flatbutton
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(ConstantString.dontHaveAcc),
-                                    FlatCustomButton(
-                                        onPressed: () {},
-                                        title: ConstantString.buttonTextSignUp)
+                                    MaterialButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HomePage()));
+                                        },
+                                        child: Text(
+                                            ConstantString.buttonTextSignUp))
                                   ],
                                 ),
                               )
@@ -138,5 +274,26 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  //Validating the password
+  // ignore: missing_return
+  String validatePassword(String value) {
+    Pattern pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regex = RegExp(pattern);
+    print(value);
+    try {
+      if (value.isEmpty) {
+        return ConstantString.pleaseEnterPwd;
+      } else {
+        if (!regex.hasMatch(value))
+          return ConstantString.pwdCondition;
+        else
+          return null;
+      }
+    } on Exception catch (e) {
+      // TODO
+    }
   }
 }

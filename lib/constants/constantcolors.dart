@@ -13,4 +13,5 @@ class CustomColors {
   static const Color pinkDots = Color(0xffEC365C);
   static const Color cardWhite = Color(0xffffffff);
   static const Color cardGrey = Color(0xffe4e4e4);
+  static const Color fbBlue = Color(0xff1877F2);
 }

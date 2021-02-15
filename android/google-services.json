@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "414661887600",
+    "project_id": "navanaair",
+    "storage_bucket": "navanaair.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414661887600:android:b4b186528c2e161a3fd6b5",
+        "android_client_info": {
+          "package_name": "com.example.NavanaAir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414661887600-i0gj3q4nm3jv3s7u91sbhmno1e0kicn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBu62Hv9_iVFsvEQd4Fz8i5md77fqWTuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414661887600-i0gj3q4nm3jv3s7u91sbhmno1e0kicn8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
