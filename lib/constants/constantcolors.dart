@@ -14,4 +14,9 @@ class CustomColors {
   static const Color cardWhite = Color(0xffffffff);
   static const Color cardGrey = Color(0xffe4e4e4);
   static const Color fbBlue = Color(0xff1877F2);
+  static const Color menuRed = Color(0xffF44235);
+  static const Color menuGreen = Color(0xff4CAF50);
+  static const Color menuBlue = Color(0xff4050B5);
+  static const Color menuIndigo = Color(0xff9C27B0);
+  static const Color menuGreeny = Color(0xff50717B);
 }

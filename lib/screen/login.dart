@@ -232,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    HomePage()));
+                                                    Homepage()));
                                       });
                                     },
                                     child:
@@ -254,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      HomePage()));
+                                                      Homepage()));
                                         },
                                         child: Text(
                                             ConstantString.buttonTextSignUp))
